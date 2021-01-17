@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SpotifyLogin from 'react-spotify-login';
+import Login from './Login.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import './index.css';
-import App from './App'
-import {Credentials} from './Credentials'
 ReactDOM.render(
-
-  
   <React.StrictMode>
-    <App/>
+    <Login/>
   </React.StrictMode>,
   document.getElementById('root')
 );

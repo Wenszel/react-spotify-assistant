@@ -1,38 +1,28 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Credentials} from './Credentials'
 import axios from 'axios'
-import SpotifyLogin from 'react-spotify-login';
-const App = () => {
-  
-  const [token, setToken] = useState('');
+import './index.css'
+const App = (props) => {
+  const [userToken, setUserToken] = useState('');
   const [songsList, setSongsList] = useState([]);
-  const spotify = Credentials();
-  const onSuccess = response => {
-  console.log(response.access_token);
-  axios('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
-    headers:{
-      'Accept': 'application/json',
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + response.access_token,
-      
-    },
-    method: 'GET'
-  }).then(listResponse => {
-    setSongsList(listResponse.data.items);
-  })
+  const getLastestSongs = ()=>{
+    console.log(props.token)
+    axios('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Bearer ' + props.token,
+      },
+      method: 'GET'
+    }).then(listResponse => {
+      setSongsList(listResponse.data.items);
+        return <ul>{songsList.map(element => <li>{element.track.track}</li>)}</ul>
+    })
   }
-  const onFailure = response => console.error(response);
-
   return(
     <div>
-      <SpotifyLogin clientId={spotify.ClientId}
-      scope='user-read-recently-played'
-      redirectUri={spotify.redirectUri}
-      onSuccess={onSuccess}
-      onFailure={onFailure}/>
-        <ul>
-          {songsList.map((track)=><li>{track.track.name} {track.played_at}</li>)}
-        </ul>
+        <h1>Witaj użytkowniku</h1>
+        <button onClick={getLastestSongs}>Get songs</button>
     </div>
   );
   
