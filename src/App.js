@@ -35,9 +35,11 @@ const App = (props) => {
     getSongs();
   }
   return(
-    <div>
-        <h1>Hello {username}</h1>
-        <img src={userImage} alt="Profile"/>
+    <div className="wrapper">
+        <div className="user-welcome">
+          <img className="user-image"src={userImage} alt="Profile"/>
+          <h1>Hello {username}</h1>
+        </div>
         <button onClick={handleGetSongsClick}>Get songs</button>
         <ul>
         {songsList.map(item=><li>{item.track.name}</li>)}
