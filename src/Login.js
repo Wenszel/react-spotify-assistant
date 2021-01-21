@@ -28,7 +28,7 @@ const Login = () => {
             onFailure={onFailure}/>
           }
         <Route path="/logged" >
-            <App token = {userToken}/>
+          {isLogged ? <App token = {userToken}/> : <Redirect to="/"/>}          
         </Route>
     </Router>
   
