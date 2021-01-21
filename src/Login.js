@@ -6,11 +6,10 @@ import SpotifyLogin from 'react-spotify-login';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 const Login = () => {
   const [isLogged, setIsLogged] = useState(false);
-  const [userToken, setUserToken] = useState('');
-  let token;
-  const onSuccess = async response => {
-    token = response.access_token
-  handleUnmount()
+  const [userToken, setUserToken] = useState();
+  const onSuccess = response => {
+    setUserToken(response.access_token);
+    handleUnmount();
   }
   const onFailure = response => console.error(response);
   const spotify = Credentials();
@@ -23,18 +22,17 @@ const Login = () => {
         <Link to="/logged">
         {isLogged ? null:
             <SpotifyLogin 
-            
             className="login-button"
             clientId={spotify.ClientId}
             scope={'user-read-recently-played','user-top-read'}
-            redirectUri={spotify.redirectUri}
             onSuccess={onSuccess}
+            redirectUri={spotify.redirectUri}
             onFailure={onFailure}/>
           }
         </Link>
         <Route path="/logged" >
-        
-            <App token = {userToken} />
+          <p>{userToken}</p>
+            <App token = {userToken}/>
         </Route>
     </Router>
   
