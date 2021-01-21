@@ -3,7 +3,8 @@ import axios from 'axios'
 import './index.css'
 const App = (props) => {
   const [userToken] = useState(props.token)
-  const [songsList, setSongsList] = useState([]);
+  const [latestSongsList, setLatestSongsList] = useState([]);
+  const [topSongsList, setTopSongsList] = useState([]);
   const [userImage, setUserImage] = useState('');
   const [username, setUsername] = useState('');
   useEffect(()=>{
@@ -19,7 +20,7 @@ const App = (props) => {
       setUserImage(listResponse.data.images[0].url);
     })
   },[])
-  const getSongs = ()=>{
+  const getLatestSongs = ()=>{
     axios('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
       headers:{
         'Accept': 'application/json',
@@ -28,11 +29,26 @@ const App = (props) => {
       },
       method: 'GET'
     }).then(listResponse => {
-      setSongsList(listResponse.data.items);
+      setLatestSongsList(listResponse.data.items);
     })
   }
-  const handleGetSongsClick = ()=>{
-    getSongs();
+  const getTopSongs = ()=>{
+    axios('https://api.spotify.com/v1/me/top/tracks?time_range=long_term', {
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Bearer '+ userToken,
+      },
+      method: 'GET'
+    }).then(listResponse => {
+      setTopSongsList(listResponse.data.items)
+    })
+  }
+  const handleGetLatestSongsClick = ()=>{
+    getLatestSongs();
+  }
+  const handleGetTopSongsClick = ()=>{
+    getTopSongs();
   }
   return(
     <div className="wrapper">
@@ -40,9 +56,13 @@ const App = (props) => {
           <img className="user-image"src={userImage} alt="Profile"/>
           <h1>Hello {username}</h1>
         </div>
-        <button onClick={handleGetSongsClick}>Get songs</button>
+        <button onClick={handleGetLatestSongsClick}>Get songs</button>
+        <button onClick={handleGetTopSongsClick}>Get Top songs</button>
         <ul>
-        {songsList.map(item=><li>{item.track.name}</li>)}
+        {latestSongsList.map(item=><li>{item.track.name}</li>)}
+        </ul>
+        <ul>
+        {topSongsList.map(item=><li>{item.name}</li>)}
         </ul>
     </div>
     
