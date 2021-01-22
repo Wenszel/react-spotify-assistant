@@ -3,7 +3,7 @@ import axios from 'axios';
 const TopSongs = (props)=>{
     const [topSongsList, setTopSongsList] = useState([]);
     useEffect(()=>{
-      axios('https://api.spotify.com/v1/me/top/tracks?time_range=long_term', {
+      axios(`https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=${props.limit}`, {
         headers:{
           'Accept': 'application/json',
           'Content-Type' : 'application/json',

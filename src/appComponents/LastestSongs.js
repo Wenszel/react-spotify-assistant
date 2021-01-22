@@ -3,7 +3,7 @@ import axios from 'axios';
 const LatestSongs = (props)=>{
     const [latestSongsList, setLatestSongsList] = useState([]);
     useEffect(()=>{
-        axios('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
+        axios(`https://api.spotify.com/v1/me/player/recently-played?limit=${props.limit}`, {
             headers:{
               'Accept': 'application/json',
               'Content-Type' : 'application/json',

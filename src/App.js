@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useLayoutEffect, useState} from 'react';
 import axios from 'axios';
 import TopSongs from './appComponents/TopSongs';
+import TopArtists from './appComponents/TopArtists';
 import LatestSongs from './appComponents/LastestSongs';
 import './index.css'
 const App = (props) => {
   const [renderedList, setRenderedList] = useState('');
+  const [requestLimit, setRequestLimit] = useState(20);
   const [userToken] = useState(props.token);
   const [userImage, setUserImage] = useState('');
   const [username, setUsername] = useState('');
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     axios('https://api.spotify.com/v1/me', {
       headers:{
         'Accept': 'application/json',
@@ -27,6 +29,12 @@ const App = (props) => {
   const handleGetTopSongsClick = ()=>{
     setRenderedList("topSongs");
   }
+  const handleGetTopArtistsClick = ()=>{
+    setRenderedList("topArtists");
+  }
+  const handleChangeAmount = (event)=>{
+    setRequestLimit(event.target.value);
+  }
   return(
     <div className="wrapper">
         <div className="user-welcome">
@@ -35,8 +43,11 @@ const App = (props) => {
         </div>
         <button onClick={handleGetLatestSongsClick}>Get Latest songs</button>
         <button onClick={handleGetTopSongsClick}>Get Top songs</button>
-        {renderedList === "topSongs" ? <TopSongs token={userToken}/> : null}
-        {renderedList === "latestSongs" ? <LatestSongs token={userToken}/> : null}
+        <button onClick={handleGetTopArtistsClick}>Get Top artists</button>
+        <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
+        {renderedList === "topSongs" ? <TopSongs token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "latestSongs" ? <LatestSongs token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "topArtists" ? <TopArtists token={userToken} limit={requestLimit}/> : null}
     </div>
   );
   
