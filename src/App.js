@@ -45,9 +45,9 @@ const App = (props) => {
         <button onClick={handleGetTopSongsClick}>Get Top songs</button>
         <button onClick={handleGetTopArtistsClick}>Get Top artists</button>
         <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
-        {renderedList === "topSongs" ? <TopSongs token={userToken} limit={requestLimit}/> : null}
-        {renderedList === "latestSongs" ? <LatestSongs token={userToken} limit={requestLimit}/> : null}
-        {renderedList === "topArtists" ? <TopArtists token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "topSongs" ? <TopSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "latestSongs" ? <LatestSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "topArtists" ? <TopArtists key={requestLimit} token={userToken} limit={requestLimit}/> : null}
     </div>
   );
   

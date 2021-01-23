@@ -3,7 +3,7 @@ import axios from 'axios';
 const TopArtists = (props)=>{
     const [topArtistsList, setTopArtistsList] = useState([]);
     useEffect(()=>{
-        axios(`https://api.spotify.com/v1/me/top/artists?limit=${props.limit}`, {
+        axios(`https://api.spotify.com/v1/me/top/artists?limit=50`, {
             headers:{
               'Accept': 'application/json',
               'Content-Type' : 'application/json',
@@ -15,11 +15,12 @@ const TopArtists = (props)=>{
           })
     },[])
     return(<ol>
-      {topArtistsList.map(item => 
+      {topArtistsList.map((item,index) => 
+       index<props.limit ? 
       <li key={topArtistsList.indexOf(item)}>
         <img src={item.images[2].url} alt="track"/>
         {item.name}
-      </li>)}
+      </li>:null)}
     </ol>)
 }
 export default TopArtists;

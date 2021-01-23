@@ -3,7 +3,7 @@ import axios from 'axios';
 const TopSongs = (props)=>{
     const [topSongsList, setTopSongsList] = useState([]);
     useEffect(()=>{
-      axios(`https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=${props.limit}`, {
+      axios(`https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50`, {
         headers:{
           'Accept': 'application/json',
           'Content-Type' : 'application/json',
@@ -15,11 +15,13 @@ const TopSongs = (props)=>{
       });
     },[])
     return(<ol>
-      {topSongsList.map(item => 
-      <li key={topSongsList.indexOf(item)}>
-        <img src={item.album.images[2].url} alt="track"/>
-        {item.name}
-      </li>)}
+      {topSongsList.map((item, index) => 
+        index<props.limit ? 
+          <li key={topSongsList.indexOf(item)}>
+            <img src={item.album.images[2].url} alt="track"/>
+            {item.name}
+          </li> : null) 
+          } 
     </ol>)
 }
 export default TopSongs;
