@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DownloadList from './DownloadList'
 import axios from 'axios';
 const TopSongs = (props)=>{
     const [topSongsList, setTopSongsList] = useState([]);
@@ -15,6 +16,7 @@ const TopSongs = (props)=>{
       });
     },[])
     return(<ol>
+      <DownloadList list={topSongsList}/>
       {topSongsList.map((item, index) => 
         index<props.limit ? 
           <li key={topSongsList.indexOf(item)}>
