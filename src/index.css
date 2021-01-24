@@ -7,10 +7,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
-  
+  overflow: scroll;
 }
 #root{
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +17,6 @@ body {
 .wrapper{
   padding: 30px;
   border-radius: 40px;
-  height: 50vh;
   width: 50vw;
   background-color: rgba(50,50,50,0.5);
 }
@@ -34,11 +32,11 @@ body {
 .login-button{
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: black;
   padding: 10px 100px 10px 100px;
   color: green;
   font-weight: bold;
   border: green 5px solid;
   margin: 10px 10px 10px 10px;
-  border-radius: 10%;
+  border-radius: 5px;
 }

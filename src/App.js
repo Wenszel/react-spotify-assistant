@@ -33,7 +33,10 @@ const App = (props) => {
     setRenderedList("topArtists");
   }
   const handleChangeAmount = (event)=>{
-    setRequestLimit(event.target.value);
+    let inputValue = event.target.value;
+    if(inputValue<0)setRequestLimit(1);
+    else if(inputValue>50)setRequestLimit(50);
+    else setRequestLimit(event.target.value);
   }
   return(
     <div className="wrapper">
