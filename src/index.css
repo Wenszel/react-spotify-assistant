@@ -14,6 +14,25 @@ body {
   justify-content: center;
   align-items: center;
 }
+.list{
+  border-bottom: 1px solid white;
+
+}
+.download-button{
+  border: 1px solid white;
+  border-radius: 5px;
+padding: 10px;
+margin: 10px;
+margin-left: 250px;
+  color:white;
+}
+.download-button{
+  text-decoration: none;
+}
+.list>img{
+  height: 30px;
+  width: 30px;
+}
 .wrapper{
   padding: 30px;
   border-radius: 40px;

@@ -17,7 +17,7 @@ const LatestSongs = (props)=>{
     return(<ol>
       {latestSongsList.map((item,index) => 
        index<props.limit ? 
-      <li key={latestSongsList.indexOf(item)}>
+      <li key={latestSongsList.indexOf(item)} className="list">
         <img src={item.track.album.images[2].url} alt="track"/>
         {item.track.name}
       </li> : null)}

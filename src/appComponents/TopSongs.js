@@ -16,10 +16,10 @@ const TopSongs = (props)=>{
       });
     },[])
     return(<ol>
-      <DownloadList list={topSongsList}/>
+      <DownloadList name="TopSongsList" list={topSongsList}/>
       {topSongsList.map((item, index) => 
         index<props.limit ? 
-          <li key={topSongsList.indexOf(item)}>
+          <li key={topSongsList.indexOf(item)} className="list">
             <img src={item.album.images[2].url} alt="track"/>
             {item.name}
           </li> : null) 

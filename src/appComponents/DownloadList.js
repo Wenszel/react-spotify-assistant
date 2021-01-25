@@ -9,7 +9,7 @@ const DownloadList = (props)=>{
           }
         const file = new Blob([createDownloadList()], {type: 'text/plain;charset=utf-8'}); 
     return(
-        <a download={"myFile.txt"}
+        <a className="download-button" download={props.name+".txt"}
         href={URL.createObjectURL(file)}>Download list!</a>
     )
 }
