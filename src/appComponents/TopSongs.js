@@ -15,15 +15,15 @@ const TopSongs = (props)=>{
         setTopSongsList(listResponse.data.items)
       });
     },[])
-    return(<ol>
-      <DownloadList name="TopSongsList" list={topSongsList}/>
+    return(<div className="list-table">
       {topSongsList.map((item, index) => 
         index<props.limit ? 
-          <li key={topSongsList.indexOf(item)} className="list">
+          <div key={topSongsList.indexOf(item)} className="list">
             <img src={item.album.images[2].url} alt="track"/>
-            {item.name}
-          </li> : null) 
+            <p>{item.name}</p>
+          </div> : null) 
           } 
-    </ol>)
+        <DownloadList name="TopSongsList" list={topSongsList}/>
+    </div>)
 }
 export default TopSongs;

@@ -16,15 +16,15 @@ const TopArtists = (props)=>{
           })
     },[])
     return(
-    <ol>
-      <DownloadList list={topArtistsList} name="TopArtistsList"/>
+    <div className="list-table">
       {topArtistsList.map((item,index) => 
        index<props.limit ?
-        <li key={topArtistsList.indexOf(item)} className="list">
+        <div key={topArtistsList.indexOf(item)} className="list">
           <img src={item.images[2].url} height="30px"alt="track"/>
-          {item.name}
-        </li>:null 
+          <p>{item.name}</p>
+        </div>:null 
      )}   
-    </ol>)
+     <DownloadList list={topArtistsList} name="TopArtistsList"/>
+    </div>)
 }
 export default TopArtists;
