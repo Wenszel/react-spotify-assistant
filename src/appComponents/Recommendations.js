@@ -27,7 +27,6 @@ const Recommendations =({ token, limit, userId })=>{
             },
             method: 'GET'
             }).then(listResponse => {
-              console.log(listResponse.data.tracks)
             setRecommendations(listResponse.data.tracks);
           })
           })
