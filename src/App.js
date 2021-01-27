@@ -4,10 +4,11 @@ import TopSongs from './appComponents/TopSongs';
 import TopArtists from './appComponents/TopArtists';
 import LatestSongs from './appComponents/LastestSongs';
 import './index.css'
-const App = (props) => {
+import Recommendations from './appComponents/Recommendations';
+const App = ({ token }) => {
   const [renderedList, setRenderedList] = useState('');
   const [requestLimit, setRequestLimit] = useState(20);
-  const [userToken] = useState(props.token);
+  const [userToken] = useState(token);
   const [userImage, setUserImage] = useState('');
   const [username, setUsername] = useState('');
   useLayoutEffect(()=>{
@@ -32,6 +33,9 @@ const App = (props) => {
   const handleGetTopArtistsClick = ()=>{
     setRenderedList("topArtists");
   }
+  const handlePlaylistManagerClick = ()=>{
+    setRenderedList("recommendations");
+  }
   const handleChangeAmount = (event)=>{
     let inputValue = event.target.value;
     if(inputValue<0)setRequestLimit(1);
@@ -47,10 +51,12 @@ const App = (props) => {
         <button onClick={handleGetLatestSongsClick}>Get Latest songs</button>
         <button onClick={handleGetTopSongsClick}>Get Top songs</button>
         <button onClick={handleGetTopArtistsClick}>Get Top artists</button>
+        <button onClick={handlePlaylistManagerClick}>Get recommendations</button>
         <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
         {renderedList === "topSongs" ? <TopSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
         {renderedList === "latestSongs" ? <LatestSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
         {renderedList === "topArtists" ? <TopArtists key={requestLimit} token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "recommendations" ? <Recommendations key={requestLimit} token={userToken} limit={requestLimit}/> : null}
     </div>
   );
   

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-const LatestSongs = (props)=>{
+const LatestSongs = ({token, limit})=>{
     const [latestSongsList, setLatestSongsList] = useState([]);
     const formatDate = (date)=>{
       let year = date.slice(0,4);
@@ -14,17 +14,17 @@ const LatestSongs = (props)=>{
             headers:{
               'Accept': 'application/json',
               'Content-Type' : 'application/json',
-              'Authorization' : 'Bearer '+ props.token,
+              'Authorization' : 'Bearer '+ token,
             },
             method: 'GET'
           }).then(listResponse => {
-            console.log(listResponse.data.items);
             setLatestSongsList(listResponse.data.items);
+
           })
     },[])
     return(<div>
       {latestSongsList.map((item,index) => 
-       index<props.limit ? 
+       index<limit ? 
         <div key={latestSongsList.indexOf(item)} className="list">
           <img src={item.track.album.images[2].url} alt="track"/>
           <p>{item.track.name}</p>
