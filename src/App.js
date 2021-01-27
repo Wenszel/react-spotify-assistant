@@ -10,6 +10,7 @@ const App = ({ token }) => {
   const [requestLimit, setRequestLimit] = useState(20);
   const [userToken] = useState(token);
   const [userImage, setUserImage] = useState('');
+  const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
   useLayoutEffect(()=>{
     axios('https://api.spotify.com/v1/me', {
@@ -22,6 +23,7 @@ const App = ({ token }) => {
     }).then(listResponse => {
       setUsername(listResponse.data.display_name);
       setUserImage(listResponse.data.images[0].url);
+      setUserId(listResponse.data.id);
     })
   },[])
   const handleGetLatestSongsClick = ()=>{
@@ -56,7 +58,7 @@ const App = ({ token }) => {
         {renderedList === "topSongs" ? <TopSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
         {renderedList === "latestSongs" ? <LatestSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
         {renderedList === "topArtists" ? <TopArtists key={requestLimit} token={userToken} limit={requestLimit}/> : null}
-        {renderedList === "recommendations" ? <Recommendations key={requestLimit} token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "recommendations" ? <Recommendations key={requestLimit} userId = {userId} token={userToken} limit={requestLimit}/> : null}
     </div>
   );
   

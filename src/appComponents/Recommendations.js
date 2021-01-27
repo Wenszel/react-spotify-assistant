@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DownloadList from './DownloadList'
-const Recommendations =({ token, limit })=>{
+import ExportPlaylist from './ExportPlaylist';
+const Recommendations =({ token, limit, userId })=>{
     const [recommendations, setRecommendations]=useState([]);
     useEffect(()=>{
         let recommends = ''
@@ -43,7 +44,14 @@ const Recommendations =({ token, limit })=>{
         </div>:null 
      )}   
      <DownloadList list={recommendations} name="recommendations"/>
-     
+     <ExportPlaylist userId = {userId} token = {token} uris={getUries(recommendations)}/>
     </div>)
+}
+const getUries = (recommendations)=>{
+  let uries = [];
+  recommendations.forEach(item => {
+    uries.push(item.uri);
+  });
+  return uries;
 }
 export default Recommendations;
