@@ -19,9 +19,8 @@ const LatestSongs = ({token, limit})=>{
             method: 'GET'
           }).then(listResponse => {
             setLatestSongsList(listResponse.data.items);
-
           })
-    },[])
+    },[token])
     return(<div>
       {latestSongsList.map((item,index) => 
        index<limit ? 

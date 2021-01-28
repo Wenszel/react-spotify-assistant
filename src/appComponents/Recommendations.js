@@ -5,7 +5,7 @@ import ExportPlaylist from './ExportPlaylist';
 const Recommendations =({ token, limit, userId })=>{
     const [recommendations, setRecommendations]=useState([]);
     useEffect(()=>{
-        let recommends = ''
+        let recommends = '';
         axios(`https://api.spotify.com/v1/me/top/artists?limit=5`, {
             headers:{
               'Accept': 'application/json',
@@ -14,7 +14,7 @@ const Recommendations =({ token, limit, userId })=>{
             },
             method: 'GET'
           }).then(listResponse => {
-            let {items} = listResponse.data 
+            let {items} = listResponse.data;
             for (let i = 0 ; i<5; i++){
                 if(!recommends.includes(items[i].id)) recommends+=items[i].id+",";
             }
@@ -31,14 +31,14 @@ const Recommendations =({ token, limit, userId })=>{
           })
           })
         
-    },[])
+    },[token, limit])
     
     return (
 <div className="list-table">
       {recommendations.map((item,index) => 
        index< limit ?
         <div key={recommendations.indexOf(item)} className="list">
-          <img src={item.album.images[2].url} height="30px"alt="track"/>
+          <img src={item.album.images[2].url} alt="track"/>
           <p>{item.name}</p>
         </div>:null 
      )}   

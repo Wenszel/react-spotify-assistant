@@ -5,7 +5,7 @@ const DownloadList = ({name, list})=>{
             list.forEach((item, index)=>{
               formatedList+=`${index+1}. ${item.name}\n`;
             })
-            return(list);
+            return(formatedList);
           }
         const file = new Blob([createDownloadList()], {type: 'text/plain;charset=utf-8'}); 
     return(

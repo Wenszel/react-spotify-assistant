@@ -15,7 +15,7 @@ const TopSongs = ({ token, limit })=>{
         setTopSongsList(listResponse.data.items)
         
       });
-    },[])
+    },[token])
     return(<div className="list-table">
       {topSongsList.map((item, index) => 
         index<limit ? 

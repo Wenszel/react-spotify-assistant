@@ -25,7 +25,7 @@ const App = ({ token }) => {
       setUserImage(listResponse.data.images[0].url);
       setUserId(listResponse.data.id);
     })
-  },[])
+  },[userToken])
   const handleGetLatestSongsClick = ()=>{
     setRenderedList("latestSongs");
   }
@@ -40,14 +40,14 @@ const App = ({ token }) => {
   }
   const handleChangeAmount = (event)=>{
     let inputValue = event.target.value;
-    if(inputValue<0)setRequestLimit(1);
-    else if(inputValue>50)setRequestLimit(50);
+    if (inputValue < 0)setRequestLimit(1);
+    else if (inputValue > 50)setRequestLimit(50);
     else setRequestLimit(event.target.value);
   }
   return(
     <div className="wrapper">
         <div className="user-welcome">
-          <img className="user-image"src={userImage} alt="Profile"/>
+          <img className="user-image" src={userImage} alt="Profile"/>
           <h1>Hello {username}</h1>
         </div>
         <button onClick={handleGetLatestSongsClick}>Get Latest songs</button>
@@ -55,10 +55,10 @@ const App = ({ token }) => {
         <button onClick={handleGetTopArtistsClick}>Get Top artists</button>
         <button onClick={handlePlaylistManagerClick}>Get recommendations</button>
         <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
-        {renderedList === "topSongs" ? <TopSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
-        {renderedList === "latestSongs" ? <LatestSongs key={requestLimit} token={userToken} limit={requestLimit}/> : null}
-        {renderedList === "topArtists" ? <TopArtists key={requestLimit} token={userToken} limit={requestLimit}/> : null}
-        {renderedList === "recommendations" ? <Recommendations key={requestLimit} userId = {userId} token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "topSongs" ? <TopSongs token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "latestSongs" ? <LatestSongs token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "topArtists" ? <TopArtists token={userToken} limit={requestLimit}/> : null}
+        {renderedList === "recommendations" ? <Recommendations userId={userId} token={userToken} limit={requestLimit}/> : null}
     </div>
   );
   

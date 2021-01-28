@@ -24,6 +24,6 @@ const ExportPlaylist = ({uris,userId,token})=>{
               }
         })
     }
-    return <button onClick={createPlaylist}>Export Playlist</button>
+    return <button className="download-button" onClick={createPlaylist}>Export Playlist</button>
 }
 export default ExportPlaylist;
