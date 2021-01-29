@@ -24,6 +24,7 @@ body {
   justify-content: space-between;
 }
 .download-button{
+  cursor: pointer;
   border: 1px solid white;
   background-color: black;
   border-radius: 5px;
