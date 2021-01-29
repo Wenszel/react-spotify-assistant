@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {createContext, useState} from 'react'
 import {Credentials} from './Credentials'
 import './index.css'
 import App from './App'
 import SpotifyLogin from 'react-spotify-login';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+export const TokenContext = createContext();
 const Login = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [userToken, setUserToken] = useState();
@@ -28,7 +29,9 @@ const Login = () => {
             onFailure={onFailure}/>
           }
         <Route path="/logged" >
-          {isLogged ? <App token = {userToken}/> : <Redirect to="/"/>}          
+          <TokenContext.Provider value={userToken}>
+            {isLogged ? <App token = {userToken}/> : <Redirect to="/"/>}      
+          </TokenContext.Provider>
         </Route>
     </Router>
   

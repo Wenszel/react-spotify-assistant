@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import DownloadList from './DownloadList'
 import ExportPlaylist from './ExportPlaylist';
-const Recommendations =({ token, limit, userId })=>{
+import { LimitContext } from '../App'
+import { TokenContext } from '../Login';
+
+const Recommendations =({ userId })=>{
+    const limit = useContext(LimitContext);
+    const token = useContext(TokenContext);
     const [recommendations, setRecommendations]=useState([]);
     useEffect(()=>{
         let recommends = '';
@@ -30,20 +35,19 @@ const Recommendations =({ token, limit, userId })=>{
             setRecommendations(listResponse.data.tracks);
           })
           })
-        
     },[token, limit])
-    
+
     return (
-<div className="list-table">
+    <div className="list-table">
       {recommendations.map((item,index) => 
-       index< limit ?
-        <div key={recommendations.indexOf(item)} className="list">
-          <img src={item.album.images[2].url} alt="track"/>
-          <p>{item.name}</p>
-        </div>:null 
-     )}   
-     <DownloadList list={recommendations} name="recommendations"/>
-     <ExportPlaylist userId = {userId} token = {token} uris={getUries(recommendations)}/>
+        index< limit ?
+          <div key={recommendations.indexOf(item)} className="list">
+            <img src={item.album.images[2].url} alt="track"/>
+            <p>{item.name}</p>
+          </div>:null 
+      )}   
+      <DownloadList list={recommendations} name="recommendations"/>
+      <ExportPlaylist userId = {userId} token = {token} uris={getUries(recommendations)}/>
     </div>)
 }
 const getUries = (recommendations)=>{

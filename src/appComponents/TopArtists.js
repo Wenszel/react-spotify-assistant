@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DownloadList from './DownloadList'
+import { LimitContext } from '../App'
 import axios from 'axios';
-import {Pie} from 'react-chartjs-2'
+import { Pie } from 'react-chartjs-2'
+import { TokenContext } from '../Login';
+
 const Chart = ({genres})=>{
   const [data, setData] = useState([]);
   useEffect(()=>{
@@ -28,7 +31,10 @@ const Chart = ({genres})=>{
       </div>
     )
 }
-const TopArtists = ({ token, limit })=>{
+
+const TopArtists = ()=>{
+    const limit = useContext(LimitContext);
+    const token = useContext(TokenContext);
     const [topArtistsList, setTopArtistsList] = useState([]);
     const [genres, setGenres] = useState([]);
     useEffect(()=>{

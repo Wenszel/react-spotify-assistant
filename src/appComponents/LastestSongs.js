@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { LimitContext } from '../App'
+import { TokenContext } from '../Login';
 import axios from 'axios';
-const LatestSongs = ({token, limit})=>{
+const LatestSongs = ()=>{
+    const limit = useContext(LimitContext);
+    const token = useContext(TokenContext);
     const [latestSongsList, setLatestSongsList] = useState([]);
     const formatDate = (date)=>{
       let year = date.slice(0,4);

@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DownloadList from './DownloadList'
+import { LimitContext } from '../App'
+import { TokenContext } from '../Login';
 import axios from 'axios';
-const TopSongs = ({ token, limit })=>{
+
+const TopSongs = ()=>{
+    const limit = useContext(LimitContext);
+    const token = useContext(TokenContext);
     const [topSongsList, setTopSongsList] = useState([]);
     useEffect(()=>{
       axios(`https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50`, {
@@ -16,6 +21,7 @@ const TopSongs = ({ token, limit })=>{
         
       });
     },[token])
+    
     return(<div className="list-table">
       {topSongsList.map((item, index) => 
         index<limit ? 
