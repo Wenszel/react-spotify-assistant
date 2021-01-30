@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
 import DownloadList from './DownloadList'
 import { LimitContext } from '../App'
-import axios from 'axios';
+import axios from 'axios'
+import PropTypes from 'prop-types'
 import { Pie } from 'react-chartjs-2'
-import { TokenContext } from '../Login';
+import { TokenContext } from '../Login'
 
-const Chart = ({genres})=>{
+const Chart = ({ genres })=>{
   const [data, setData] = useState([]);
   useEffect(()=>{
     const createDataObject = () => {
@@ -21,6 +22,15 @@ const Chart = ({genres})=>{
           datasets[0].data[labels.indexOf(item)]++
         }
       });
+      datasets[0].data = datasets[0].data.filter(( item, index ) => {
+        if(item === 1){
+          labels.splice(index,1);
+        }
+        else if(item > 1){
+          return item;
+        }
+      });
+      console.log({labels: labels, datasets: datasets});
       return({labels: labels, datasets: datasets});
     }
     setData(createDataObject());
@@ -31,7 +41,9 @@ const Chart = ({genres})=>{
       </div>
     )
 }
-
+Chart.propTypes = {
+  genres: PropTypes.array
+}
 const TopArtists = ()=>{
     const limit = useContext(LimitContext);
     const token = useContext(TokenContext);

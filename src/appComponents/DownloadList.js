@@ -1,5 +1,6 @@
 import React from 'react'
-const DownloadList = ({name, list})=>{
+import PropTypes from 'prop-types';
+const DownloadList = ({ name, list })=>{
   const createDownloadList = ()=>{
     let formatedList="";
     list.forEach((item, index)=>{
@@ -13,5 +14,9 @@ const DownloadList = ({name, list})=>{
     <a className="download-button" download={name+".txt"}
     href={URL.createObjectURL(file)}>Download list!</a>
   )
+}
+DownloadList.propTypes = {
+  name: PropTypes.string,
+  list: PropTypes.array
 }
 export default DownloadList;

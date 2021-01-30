@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import DownloadList from './DownloadList'
 import ExportPlaylist from './ExportPlaylist';
+import PropTypes from 'prop-types'
 import { LimitContext } from '../App'
 import { TokenContext } from '../Login';
 
@@ -56,5 +57,8 @@ const getUries = (recommendations)=>{
     uries.push(item.uri);
   });
   return uries;
+}
+Recommendations.propTypes = {
+  userId: PropTypes.string
 }
 export default Recommendations;
