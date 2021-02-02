@@ -4,6 +4,7 @@ import TopSongs from './appComponents/TopSongs';
 import TopArtists from './appComponents/TopArtists';
 import LatestSongs from './appComponents/LastestSongs';
 import './index.css'
+import CustomRecommendation from './appComponents/CustomRecommendation';
 import Recommendations from './appComponents/Recommendations';
 import { TokenContext } from './Login';
 
@@ -50,12 +51,14 @@ const App = () => {
         <button onClick={()=>{setRenderedList("topSongs")}}>Get Top songs</button>
         <button onClick={()=>{setRenderedList("topArtists")}}>Get Top artists</button>
         <button onClick={()=>{setRenderedList("recommendations")}}>Get recommendations</button>
+        <button onClick={()=>{setRenderedList("customRecommendation")}}>Get custom recommendations</button>
         <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
         <LimitContext.Provider value={requestLimit}>
           {renderedList === "topSongs" ? <TopSongs/> : null}
           {renderedList === "latestSongs" ? <LatestSongs/> : null}
           {renderedList === "topArtists" ? <TopArtists /> : null}
           {renderedList === "recommendations" ? <Recommendations userId={userId}/> : null}
+          {renderedList === "customRecommendation" ? <CustomRecommendation userId={userId}/> : null}
         </LimitContext.Provider>
     </div>
   );
