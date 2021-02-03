@@ -33,6 +33,7 @@ const Recommendations =({ userId })=>{
             },
             method: 'GET'
             }).then(listResponse => {
+              console.log(listResponse)
             setRecommendations(listResponse.data.tracks);
           })
           })

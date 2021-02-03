@@ -18,10 +18,14 @@ body {
   flex-direction: column;
 }
 .list{
+  
   border-bottom: 1px solid white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.list *{
+  margin: 0px !important;
 }
 .download-button{
   cursor: pointer;
@@ -45,6 +49,9 @@ body {
   border-radius: 40px;
   width: 50vw;
   background-color: rgba(50,50,50,0.5);
+}
+.wrapper *{
+  margin: 10px 0px 10px 0px;
 }
 .user-image{
   width: 100px;

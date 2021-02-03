@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState, createContext, useContext } from 'rea
 import axios from 'axios';
 import TopSongs from './appComponents/TopSongs';
 import TopArtists from './appComponents/TopArtists';
+import SpotifyPlayer from 'react-spotify-web-playback';
 import LatestSongs from './appComponents/LastestSongs';
 import './index.css'
 import CustomRecommendation from './appComponents/CustomRecommendation';
@@ -11,7 +12,7 @@ import { TokenContext } from './Login';
 export const LimitContext = createContext();
 
 const App = () => {
-
+  
   const [renderedList, setRenderedList] = useState('');
   const [requestLimit, setRequestLimit] = useState(20);
   const [userToken] = useState(useContext(TokenContext));
@@ -46,7 +47,21 @@ const App = () => {
         <div className="user-welcome">
           <img className="user-image" src={userImage} alt="Profile"/>
           <h1>Hello {username}</h1>
+          
         </div>
+        <SpotifyPlayer
+          token={useContext(TokenContext)}
+          uris={[]}
+          styles={{
+            activeColor: '#fff',
+            borderRadius: '5px',
+            bgColor: 'rgb(50,50,50)',
+            color: '#fff',
+            loaderColor: '#fff',
+            trackArtistColor: '#ccc',
+            trackNameColor: '#fff',
+          }}
+        />
         <button onClick={()=>{setRenderedList("latestSongs")}}>Get Latest songs</button>
         <button onClick={()=>{setRenderedList("topSongs")}}>Get Top songs</button>
         <button onClick={()=>{setRenderedList("topArtists")}}>Get Top artists</button>

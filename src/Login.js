@@ -23,7 +23,7 @@ const Login = () => {
             <SpotifyLogin 
             className="login-button"
             clientId={spotify.ClientId}
-            scope={'user-read-recently-played user-top-read playlist-modify-private'}
+            scope={'user-read-recently-played streaming user-read-playback-state user-modify-playback-state user-top-read user-read-email playlist-modify-private user-modify-playback-state user-read-private'}
             onSuccess={onSuccess}
             redirectUri={spotify.redirectUri}
             onFailure={onFailure}/>
