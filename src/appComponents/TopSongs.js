@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import DownloadList from './DownloadList'
-import { LimitContext } from '../App'
+import DownloadList from './DownloadList';
+import ListImage from './ListImage';
+import { LimitContext } from '../App';
 import { TokenContext } from '../Login';
 import axios from 'axios';
 
-const TopSongs = ()=>{
+const TopSongs = ({ changeSong })=>{
     const limit = useContext(LimitContext);
     const token = useContext(TokenContext);
     const [topSongsList, setTopSongsList] = useState([]);
@@ -26,7 +27,7 @@ const TopSongs = ()=>{
       {topSongsList.map((item, index) => 
         index<limit ? 
           <div key={topSongsList.indexOf(item)} className="list">
-            <img src={item.album.images[2].url} alt="track"/>
+            <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong}/>
             <p>{item.name}</p>
           </div> : null) 
           } 

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import DownloadList from './DownloadList'
-import { LimitContext } from '../App'
-import axios from 'axios'
-import PropTypes from 'prop-types'
-import { Pie } from 'react-chartjs-2'
-import { TokenContext } from '../Login'
+import React, { useContext, useEffect, useState } from 'react';
+import DownloadList from './DownloadList';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { Pie } from 'react-chartjs-2';
+import { LimitContext } from '../App';
+import { TokenContext } from '../Login';
 
 const Chart = ({ genres })=>{
   const [data, setData] = useState([]);
@@ -71,7 +71,9 @@ const TopArtists = ()=>{
       {topArtistsList.map((item,index) => 
        index< limit ?
         <div key={topArtistsList.indexOf(item)} className="list">
-          <img src={item.images[2].url} alt="track"/>
+          { index===0 ? <img src={item.images[0].url} alt="track" className="first-image"/> : null}
+          { [1,2].includes(index) ? <img src={item.images[0].url} className="podium-image" alt="track"/> : null}
+          { index > 2 ? <img src={item.images[0].url} className="other-image" alt="track"/> : null}
           <p>{item.name}</p>
         </div>:null 
      )}   

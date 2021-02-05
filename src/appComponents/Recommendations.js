@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import DownloadList from './DownloadList'
+import DownloadList from './DownloadList';
 import ExportPlaylist from './ExportPlaylist';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import ListImage from './ListImage';
 import { LimitContext } from '../App'
 import { TokenContext } from '../Login';
 
-const Recommendations =({ userId })=>{
+const Recommendations =({ userId, changeSong })=>{
     const limit = useContext(LimitContext);
     const token = useContext(TokenContext);
     const [recommendations, setRecommendations]=useState([]);
@@ -42,9 +43,9 @@ const Recommendations =({ userId })=>{
     return (
     <div className="list-table">
       {recommendations.map((item,index) => 
-        index< limit ?
+        index < limit ?
           <div key={recommendations.indexOf(item)} className="list">
-            <img src={item.album.images[2].url} alt="track"/>
+            <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong}/>
             <p>{item.name}</p>
           </div>:null 
       )}   

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, createContext, useContext } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import axios from 'axios';
 import TopSongs from './appComponents/TopSongs';
 import TopArtists from './appComponents/TopArtists';
@@ -15,12 +15,18 @@ const App = () => {
   
   const [renderedList, setRenderedList] = useState('');
   const [requestLimit, setRequestLimit] = useState(20);
+  const [playerDisplaying, setPlayerDisplaying] = useState(false);
+
+  const [playerStatus, setPlayerStatus] = useState(false);
+  const [currentSong, setCurrentSong] = useState();
+
   const [userToken] = useState(useContext(TokenContext));
+
   const [userImage, setUserImage] = useState('');
   const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
 
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     axios('https://api.spotify.com/v1/me', {
       headers:{
         'Accept': 'application/json',
@@ -42,16 +48,40 @@ const App = () => {
     else setRequestLimit(event.target.value);
   }
 
+  const handleSongChange = (newSong) => {
+    setCurrentSong(newSong);
+    setPlayerDisplaying(true);
+    setPlayerStatus(true);
+  }
+
   return(
+    <>
     <div className="wrapper">
         <div className="user-welcome">
           <img className="user-image" src={userImage} alt="Profile"/>
           <h1>Hello {username}</h1>
           
         </div>
+        <button onClick={()=>{setRenderedList("latestSongs")}}>Get Latest songs</button>
+        <button onClick={()=>{setRenderedList("topSongs")}}>Get Top songs</button>
+        <button onClick={()=>{setRenderedList("topArtists")}}>Get Top artists</button>
+        <button onClick={()=>{setRenderedList("recommendations")}}>Get recommendations</button>
+        <button onClick={()=>{setRenderedList("customRecommendation")}}>Get custom recommendations</button>
+        <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
+        <LimitContext.Provider value={requestLimit}>
+          {renderedList === "topSongs" ? <TopSongs changeSong={handleSongChange}/> : null}
+          {renderedList === "latestSongs" ? <LatestSongs changeSong={handleSongChange}/> : null}
+          {renderedList === "topArtists" ? <TopArtists  changeSong={handleSongChange}/> : null}
+          {renderedList === "recommendations" ? <Recommendations userId={userId} changeSong={handleSongChange}/> : null}
+          {renderedList === "customRecommendation" ? <CustomRecommendation userId={userId} changeSong={handleSongChange}/> : null}
+        </LimitContext.Provider>
+    </div>
+    {playerDisplaying ? 
+      <div className="player">
         <SpotifyPlayer
-          token={useContext(TokenContext)}
-          uris={[]}
+          token={userToken}
+          play= {playerStatus}
+          uris={[currentSong]}
           styles={{
             activeColor: '#fff',
             borderRadius: '5px',
@@ -62,20 +92,9 @@ const App = () => {
             trackNameColor: '#fff',
           }}
         />
-        <button onClick={()=>{setRenderedList("latestSongs")}}>Get Latest songs</button>
-        <button onClick={()=>{setRenderedList("topSongs")}}>Get Top songs</button>
-        <button onClick={()=>{setRenderedList("topArtists")}}>Get Top artists</button>
-        <button onClick={()=>{setRenderedList("recommendations")}}>Get recommendations</button>
-        <button onClick={()=>{setRenderedList("customRecommendation")}}>Get custom recommendations</button>
-        <input type="number" min="1" max="50" onChange={handleChangeAmount} value={requestLimit}/>
-        <LimitContext.Provider value={requestLimit}>
-          {renderedList === "topSongs" ? <TopSongs/> : null}
-          {renderedList === "latestSongs" ? <LatestSongs/> : null}
-          {renderedList === "topArtists" ? <TopArtists /> : null}
-          {renderedList === "recommendations" ? <Recommendations userId={userId}/> : null}
-          {renderedList === "customRecommendation" ? <CustomRecommendation userId={userId}/> : null}
-        </LimitContext.Provider>
-    </div>
+      </div>
+    : null}
+    </>
   );
 }
 export default App;

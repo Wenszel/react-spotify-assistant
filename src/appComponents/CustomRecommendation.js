@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import DownloadList from './DownloadList'
+import DownloadList from './DownloadList';
 import ExportPlaylist from './ExportPlaylist';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import ListImage from './ListImage';
 import { LimitContext } from '../App'
 import { TokenContext } from '../Login';
 
-const CustomRecommendation =({ userId })=>{
+const CustomRecommendation =({ userId, changeSong })=>{
     const limit = useContext(LimitContext);
     const token = useContext(TokenContext);
     const [data, setData] = useState([]);
@@ -74,12 +75,13 @@ const CustomRecommendation =({ userId })=>{
     }
     return (
         <form onSubmit={handleSubmit}>
-            <select value={selectedGenre} 
+            <input placeholder="choose genre"list="genres"/>
+            <datalist id="genres" value={selectedGenre} 
                     onChange={handleSelectChange}  >
             {genres.map(genre =>
                 <option key={genre} value={genre}>{genre}</option>
             )};
-            </select>
+            </datalist>
             {properties.map(prop =>
                 <div key={prop}>
                     <label>{prop}</label>   
@@ -91,7 +93,7 @@ const CustomRecommendation =({ userId })=>{
                 {data.map((item, index) => 
                     index<limit ? 
                     <div key={data.indexOf(item)} className="list">
-                        <img src={item.album.images[2].url} alt="track"/>
+                        <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong}/>
                         <p>{item.name}</p>
                     </div> : null) 
                     } 

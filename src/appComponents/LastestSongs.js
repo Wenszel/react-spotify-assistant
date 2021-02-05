@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
+import ListImage from './ListImage';
 import { LimitContext } from '../App'
 import { TokenContext } from '../Login';
 import axios from 'axios';
 
-const LatestSongs = ()=>{
+const LatestSongs = ({changeSong})=>{
     const limit = useContext(LimitContext);
     const token = useContext(TokenContext);
     const [latestSongsList, setLatestSongsList] = useState([]);
@@ -23,6 +24,7 @@ const LatestSongs = ()=>{
             },
             method: 'GET'
           }).then(listResponse => {
+            console.log(listResponse.data.items);
             setLatestSongsList(listResponse.data.items);
           })
     },[token])
@@ -30,7 +32,7 @@ const LatestSongs = ()=>{
       {latestSongsList.map((item,index) => 
        index<limit ? 
         <div key={latestSongsList.indexOf(item)} className="list">
-          <img src={item.track.album.images[2].url} alt="track"/>
+          <ListImage image={item.track.album.images[2].url} uri={item.track.uri} changeSong={changeSong}/>
           <p>{item.track.name}</p>
           <p>{formatDate(item.played_at)}</p>
         </div>: null)}
