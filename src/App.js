@@ -1,12 +1,12 @@
 import React, { useEffect, useState, createContext, useContext } from 'react';
 import axios from 'axios';
-import TopSongs from './appComponents/TopSongs';
-import TopArtists from './appComponents/TopArtists';
+import TopSongs from './components/TopSongs';
+import TopArtists from './components/TopArtists';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import LatestSongs from './appComponents/LastestSongs';
+import LatestSongs from './components/LastestSongs';
 import './index.css'
-import CustomRecommendation from './appComponents/CustomRecommendation';
-import Recommendations from './appComponents/Recommendations';
+import CustomRecommendation from './components/CustomRecommendation';
+import Recommendations from './components/Recommendations';
 import { TokenContext } from './Login';
 
 export const LimitContext = createContext();

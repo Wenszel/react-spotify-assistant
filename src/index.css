@@ -75,6 +75,7 @@ body {
   text-decoration: none;
 }
 .wrapper{
+  margin: auto;
   padding: 30px;
   border-radius: 40px;
   width: 50vw;
