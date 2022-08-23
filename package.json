@@ -18,7 +18,7 @@
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.1",
     "react-router": "^6.3.0",
-    "react-router-dom": "^5.3.3",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.1",
     "react-spotify-login": "^0.9.1",
     "react-spotify-web-playback": "^0.8.1",

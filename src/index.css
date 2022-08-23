@@ -1,115 +1,119 @@
 body {
-  margin: 0;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+    margin: 0;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: black;
 }
 
-.list-table{
-  display: flex;
-  flex-direction: column;
+.list-table {
+    display: flex;
+    flex-direction: column;
 }
-.list{
-  border-bottom: 1px solid white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.list {
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-.list *{
-  margin: 0px !important;
+.list * {
+    margin: 0px !important;
 }
-.list-image-container{
-  height: 50px;
-  width: 50px;
-  position: relative;
+.list-image-container {
+    height: 50px;
+    width: 50px;
+    position: relative;
 }
-.list-image{
-  display: block;
-  width: 100%;
-  height: auto;
+.list-image {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 .list-image-overlay {
-  width: 30px;
-  height: 30px;
-  padding: 10px;
-  position: absolute; 
-  bottom: 0; 
-  background: rgba(0, 0, 0, 0.5); 
-  color: #f1f1f1; 
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    transition: 0.5s ease;
+    opacity: 0;
+    color: white;
+    text-align: center;
 }
-.first-image{
-  height: 100px;
-  width: 100px;
+.first-image {
+    height: 100px;
+    width: 100px;
 }
-.podium-image{
-  height: 75px;
-  width: 75px;
+.podium-image {
+    height: 75px;
+    width: 75px;
 }
-.other-image{
-  height: 50px;
-  width: 50px;
+.other-image {
+    height: 50px;
+    width: 50px;
 }
 .list-image-container:hover .list-image-overlay {
-  cursor: pointer;
-  opacity: 1;
+    cursor: pointer;
+    opacity: 1;
 }
-.download-button{
-  cursor: pointer;
-  border: 1px solid white;
-  background-color: black;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  color:white;
+.download-button {
+    cursor: pointer;
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    color: white;
 }
-.download-button{
-  text-decoration: none;
+.download-button {
+    text-decoration: none;
 }
-.wrapper{
-  margin: auto;
-  padding: 30px;
-  border-radius: 40px;
-  width: 50vw;
-  background-color: rgba(50,50,50,0.5);
+.wrapper {
+    margin: auto;
+    padding: 30px;
+    border-radius: 40px;
+    width: 50vw;
+    background-color: rgba(50, 50, 50, 0.5);
 }
-.wrapper *{
-  margin: 10px 0px 10px 0px;
+.wrapper * {
+    margin: 10px 0px 10px 0px;
 }
-.user-image{
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+.user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
-.user-welcome{
-  display: flex;
-  flex-direction: row;
+.user-welcome {
+    display: flex;
+    flex-direction: row;
 }
-.login-button{
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  padding: 10px 100px 10px 100px;
-  color: green;
-  font-weight: bold;
-  border: green 5px solid;
-  margin: 10px 10px 10px 10px;
-  border-radius: 5px;
+.login-button {
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    padding: 10px 100px 10px 100px;
+    color: green;
+    font-weight: bold;
+    border: green 5px solid;
+    margin: 10px 10px 10px 10px;
+    border-radius: 5px;
 }
-.player{
+.player {
     position: fixed !important;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+a,
+a:visited {
+    text-decoration: none;
+    color: white;
 }

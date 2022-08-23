@@ -1,9 +1,8 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { Credentials } from "./Credentials";
 import "./index.css";
 import App from "./App";
 import SpotifyLogin from "react-spotify-login";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 export const TokenContext = createContext("");
 
@@ -14,19 +13,20 @@ interface SuccessResponse {
 const Login = () => {
     const [isLogged, setIsLogged] = useState<boolean>(false);
     const [userToken, setUserToken] = useState<string>("");
+
     const onSuccess = (response: SuccessResponse) => {
         setUserToken(response.access_token);
-        handleUnmount();
+        console.log(response.access_token);
+        setIsLogged(true);
     };
     const onFailure = (response: any) => console.error(response);
     const spotify = Credentials();
-    const handleUnmount = () => {
-        setIsLogged(true);
-    };
     return (
-        <Router>
+        <>
             {isLogged ? (
-                <Redirect to="/logged" />
+                <TokenContext.Provider value={userToken}>
+                    <App />
+                </TokenContext.Provider>
             ) : (
                 <SpotifyLogin
                     className="login-button"
@@ -39,10 +39,7 @@ const Login = () => {
                     onFailure={onFailure}
                 />
             )}
-            <Route path="/logged">
-                <TokenContext.Provider value={userToken}>{isLogged ? <App /> : <Redirect to="/" />}</TokenContext.Provider>
-            </Route>
-        </Router>
+        </>
     );
 };
 export default Login;
