@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { Credentials } from "./Credentials";
 import "./index.css";
 import App from "./App";
 import SpotifyLogin from "react-spotify-login";
@@ -20,7 +19,6 @@ const Login = () => {
         setIsLogged(true);
     };
     const onFailure = (response: any) => console.error(response);
-    const spotify = Credentials();
     return (
         <>
             {isLogged ? (
@@ -30,12 +28,12 @@ const Login = () => {
             ) : (
                 <SpotifyLogin
                     className="login-button"
-                    clientId={spotify.ClientId}
+                    clientId={process.env.REACT_APP_CLIENT_ID}
                     scope={
                         "user-read-recently-played streaming user-read-playback-state user-modify-playback-state user-top-read user-read-email playlist-modify-private user-modify-playback-state user-read-private"
                     }
                     onSuccess={onSuccess}
-                    redirectUri={spotify.redirectUri}
+                    redirectUri={process.env.REACT_APP_REDIRECT_URI}
                     onFailure={onFailure}
                 />
             )}
