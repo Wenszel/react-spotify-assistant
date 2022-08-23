@@ -1,6 +1,6 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import TopSongs from "./components/TopSongs";
+import TopSongs from "./components/TopTracks/TopTracks";
 import TopArtists from "./components/TopArtists";
 import SpotifyPlayer from "react-spotify-web-playback";
 import LatestSongs from "./components/LastestSongs";
@@ -11,10 +11,7 @@ import Recommendations from "./components/Recommendations";
 import { TokenContext } from "./Login";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
-export const LimitContext = createContext<number>(20);
-
 const App = () => {
-    const [requestLimit, setRequestLimit] = useState<number>(20);
     const [playerDisplaying, setPlayerDisplaying] = useState<boolean>(false);
 
     const [playerStatus, setPlayerStatus] = useState<boolean>(false);
@@ -49,27 +46,27 @@ const App = () => {
 
     return (
         <>
-            <LimitContext.Provider value={requestLimit}>
-                <Router>
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <>
-                                    <Header userImage={userImage} username={username} />
+            <Router>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <Header userImage={userImage} username={username} />
+                                <div className="wrapper">
                                     <Outlet />
-                                </>
-                            }
-                        >
-                            <Route path="top-songs" element={<TopSongs changeSong={handleSongChange} />} />
-                            <Route path="recent-songs" element={<LatestSongs changeSong={handleSongChange} />} />
-                            <Route path="top-artists" element={<TopArtists />} />
-                            <Route path="recommendations" element={<Recommendations userId={userId} changeSong={handleSongChange} />} />
-                            <Route path="custom-recommendations" element={<CustomRecommendation userId={userId} changeSong={handleSongChange} />} />
-                        </Route>
-                    </Routes>
-                </Router>
-            </LimitContext.Provider>
+                                </div>
+                            </>
+                        }
+                    >
+                        <Route path="top-tracks" element={<TopSongs changeSong={handleSongChange} />} />
+                        <Route path="recent-songs" element={<LatestSongs changeSong={handleSongChange} />} />
+                        <Route path="top-artists" element={<TopArtists />} />
+                        <Route path="recommendations" element={<Recommendations userId={userId} changeSong={handleSongChange} />} />
+                        <Route path="custom-recommendations" element={<CustomRecommendation userId={userId} changeSong={handleSongChange} />} />
+                    </Route>
+                </Routes>
+            </Router>
             {playerDisplaying ? (
                 <div className="player">
                     <SpotifyPlayer

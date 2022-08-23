@@ -19,6 +19,9 @@
 .profile {
     margin: 1rem;
 }
+.buttons > button:hover {
+    color: aliceblue;
+}
 .profile {
     align-items: center;
     display: flex;

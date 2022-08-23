@@ -13,16 +13,16 @@ export default function Header({ userImage, username }: userData) {
         <header className={styles.header}>
             <div>
                 <Button variant="text">
-                    <Link to="top-songs">Songs</Link>
+                    <Link to="top-tracks">Top Tracks</Link>
                 </Button>
                 <Button variant="text">
-                    <Link to="top-artists">Artists</Link>
+                    <Link to="top-artists">Top Artists</Link>
                 </Button>
                 <Button variant="text">
-                    <Link to="recent-songs">Recent played</Link>
+                    <Link to="genres">Top Genres</Link>
                 </Button>
                 <Button variant="text">
-                    <Link to="genres">Genres</Link>
+                    <Link to="recent-songs">Recently played</Link>
                 </Button>
                 <Button variant="text">
                     <Link to="recommendations">Recommendations</Link>
@@ -33,7 +33,7 @@ export default function Header({ userImage, username }: userData) {
             </div>
             <div className={styles.profile}>
                 <h1>{username}</h1>
-                <img className={styles.image} src={userImage} alt="user photo" />
+                <img className={styles.image} src={userImage} alt="profile" />
             </div>
         </header>
     );
