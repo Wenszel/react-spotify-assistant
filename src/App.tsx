@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import TopSongs from "./components/TopTracks/TopTracks";
-import TopArtists from "./components/TopArtists";
+import TopSongs from "./components/Lists/TopTracks/TopTracks";
+import TopArtists from "./components/Lists/TopArtists/TopArtists";
 import SpotifyPlayer from "react-spotify-web-playback";
 import LatestSongs from "./components/LastestSongs";
 import Header from "./components/Header/Header";
