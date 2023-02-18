@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Pie } from "react-chartjs-2";
 import { TokenContext } from "../../../Login";
+import { Grid, CircularProgress } from "@mui/material";
 import useApi from "../../../hooks/useApi";
 import listsApi from "../../../services/api/listsApi";
-import artist from "../interfaces/artists";
 
 const Chart = ({ genres }: { genres: Array<string> }) => {
     const [data, setData] = useState({});
@@ -49,20 +49,51 @@ Chart.propTypes = {
 const TopArtists = () => {
     const token = useContext(TokenContext);
     const getTopArtistsApi = useApi(listsApi.getTopArtists, token);
+
     useEffect(() => {
         getTopArtistsApi.request();
     }, []);
-    return (
-        <div className="list-table">
-            {getTopArtistsApi.data?.items.map((item: artist, index: number) => (
-                <div key={index} className="list">
-                    {index === 0 ? <img src={item.images[0].url} alt="track" className="first-image" /> : null}
-                    {[1, 2].includes(index) ? <img src={item.images[0].url} className="podium-image" alt="track" /> : null}
-                    {index > 2 ? <img src={item.images[0].url} className="other-image" alt="track" /> : null}
-                    <p>{item.name}</p>
-                </div>
-            ))}
-        </div>
+
+    const generateList = () => {
+        const list = [];
+        for (let i = 0; i < getTopArtistsApi.data?.items.length; i += 3) {
+            list.push(
+                <Grid container spacing={1} className="list-items" key={i} columnSpacing={{ xs: 1 }}>
+                    {generateRow(i)}
+                </Grid>
+            );
+        }
+        return list;
+    };
+
+    const generateRow = (index: number) => {
+        const row = [];
+        for (let i = 0; i < 3; i++) {
+            row.push(generateArtistTile(index + i));
+        }
+        return row;
+    };
+
+    const generateArtistTile = (index: number) => {
+        const item = getTopArtistsApi.data?.items[index];
+        if (item == null) return;
+        return (
+            <Grid xs={4} direction="column">
+                <img src={item.images[0].url} alt="track" style={{ height: "200px", width: "200px" }} className="artist-image" />
+                <p>
+                    {index + 1}. {item.name}
+                </p>
+            </Grid>
+        );
+    };
+
+    return !getTopArtistsApi.loading ? (
+        <>
+            <h1>Top Artists</h1>
+            <div className="list-table">{generateList()}</div>
+        </>
+    ) : (
+        <CircularProgress color="inherit" />
     );
 };
 export default TopArtists;
