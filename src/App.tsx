@@ -3,7 +3,7 @@ import axios from "axios";
 import TopSongs from "./components/Lists/TopTracks/TopTracks";
 import TopArtists from "./components/Lists/TopArtists/TopArtists";
 import SpotifyPlayer from "react-spotify-web-playback";
-import LatestSongs from "./components/LastestSongs";
+import LatestSongs from "./components/Lists/RecentSongs/RecentSongs";
 import Header from "./components/Header/Header";
 import "./index.css";
 import CustomRecommendation from "./components/CustomRecommendation";

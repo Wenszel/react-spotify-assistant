@@ -21,24 +21,27 @@ const TopSongs = ({ changeSong }: { changeSong: (newSong: string) => void }) => 
     return (
         <>
             {!getTopSongsApi.loading ? (
-                <div className="list-table">
-                    {getTopSongsApi.data?.items.map((song: song, index) => (
-                        <Grid container spacing={1} className="list-items" key={index}>
-                            <Grid xs={1} item={true}>
-                                <p>{index + 1}</p>
+                <>
+                    <h1>Top tracks</h1>
+                    <div className="list-table">
+                        {getTopSongsApi.data?.items.map((song: song, index) => (
+                            <Grid container spacing={1} className="list-items" key={index}>
+                                <Grid xs={1} item={true}>
+                                    <p>{index + 1}</p>
+                                </Grid>
+                                <Grid xs={1} item={true}>
+                                    <ListImage image={song.album.images[2].url} uri={song.uri} changeSong={changeSong} />
+                                </Grid>
+                                <Grid xs={5} item={true}>
+                                    <p style={{ fontWeight: "bold" }}>{song.name}</p>
+                                </Grid>
+                                <Grid xs={5} item={true}>
+                                    {artistsNamesWithCommas(song.artists)}
+                                </Grid>
                             </Grid>
-                            <Grid xs={1} item={true}>
-                                <ListImage image={song.album.images[2].url} uri={song.uri} changeSong={changeSong} />
-                            </Grid>
-                            <Grid xs={5} item={true}>
-                                <p style={{ fontWeight: "bold" }}>{song.name}</p>
-                            </Grid>
-                            <Grid xs={5} item={true}>
-                                {artistsNamesWithCommas(song.artists)}
-                            </Grid>
-                        </Grid>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </>
             ) : (
                 <CircularProgress color="inherit" />
             )}

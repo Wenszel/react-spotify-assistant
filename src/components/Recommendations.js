@@ -5,6 +5,7 @@ import ExportPlaylist from "./ExportPlaylist";
 import PropTypes from "prop-types";
 import ListImage from "./ListImage";
 import { TokenContext } from "../Login";
+import {CircularProgress, Grid} from "@mui/material";
 
 const Recommendations = ({ userId, changeSong }) => {
     const token = useContext(TokenContext);
@@ -40,14 +41,27 @@ const Recommendations = ({ userId, changeSong }) => {
 
     return (
         <div className="list-table">
-            {recommendations.map((item, index) => (
-                <div key={recommendations.indexOf(item)} className="list">
-                    <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong} />
-                    <p>{item.name}</p>
-                </div>
-            ))}
-            <DownloadList list={recommendations} name="recommendations" />
-            <ExportPlaylist userId={userId} token={token} uris={getUries(recommendations)} />
+            {recommendations ?
+            <>
+                {recommendations.map((item, index) => (
+                    <Grid container spacing={1} className="list-items" key={index}>
+                        <Grid item xs={2}>
+                            <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong} />
+                        </Grid>
+                        <Grid item xs={5}>
+                            <p>{item.name}</p>
+                        </Grid>
+                        <Grid item xs={5}>
+                            <p>{item.artists.map(artist => artist.name).join(", ")}</p>
+                        </Grid>
+                    </Grid>
+                ))}
+                <DownloadList list={recommendations} name="recommendations" />
+                <ExportPlaylist userId={userId} token={token} uris={getUries(recommendations)} />
+            </>
+            : (
+            <CircularProgress color="inherit" />
+            )}
         </div>
     );
 };

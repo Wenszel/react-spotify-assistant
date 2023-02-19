@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
@@ -32,8 +32,8 @@ export default function Header({ userImage, username }: userData) {
                 </Button>
             </div>
             <div className={styles.profile}>
-                <h1>{username}</h1>
-                <img className={styles.image} src={userImage} alt="profile" />
+                <p>{username}</p>
+                <Avatar src={userImage} alt="profile" />
             </div>
         </header>
     );
