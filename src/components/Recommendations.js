@@ -45,13 +45,13 @@ const Recommendations = ({ userId, changeSong }) => {
             <>
                 {recommendations.map((item, index) => (
                     <Grid container spacing={1} className="list-items" key={index}>
-                        <Grid item xs={2}>
+                        <Grid item xs={1}>
                             <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong} />
                         </Grid>
                         <Grid item xs={5}>
                             <p>{item.name}</p>
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={6}>
                             <p>{item.artists.map(artist => artist.name).join(", ")}</p>
                         </Grid>
                     </Grid>

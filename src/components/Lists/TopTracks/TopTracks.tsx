@@ -7,7 +7,7 @@ import { Grid, CircularProgress } from "@mui/material";
 import artist from "../interfaces/artists";
 import song from "../interfaces/song";
 
-const TopSongs = ({ changeSong }: { changeSong: (newSong: string) => void }) => {
+const TopSongs = ({ changeSong }) => {
     const token = useContext(TokenContext);
     const getTopSongsApi = useApi(listsApi.getTopSongs, token);
     useEffect(() => {
