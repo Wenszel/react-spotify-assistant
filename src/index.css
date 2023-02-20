@@ -49,6 +49,7 @@ body {
 .list-image-container:hover .list-image-overlay {
     opacity: 1;
 }
+
 .wrapper {
     margin: auto;
     flex-direction: column;

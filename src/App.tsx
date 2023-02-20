@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {useEffect, useState, useContext, createContext} from "react";
 import axios from "axios";
 import TopSongs from "./components/Lists/TopTracks/TopTracks";
 import TopArtists from "./components/Lists/TopArtists/TopArtists";
@@ -10,7 +10,7 @@ import CustomRecommendation from "./components/CustomRecommendation";
 import Recommendations from "./components/Recommendations";
 import { TokenContext } from "./Login";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-
+export const currentSongContext = createContext("");
 const App = () => {
     const [playerDisplaying, setPlayerDisplaying] = useState<boolean>(false);
 
@@ -46,6 +46,7 @@ const App = () => {
 
     return (
         <>
+        <currentSongContext.Provider value={currentSong}>
             <Router>
                 <Routes>
                     <Route
@@ -59,14 +60,17 @@ const App = () => {
                             </>
                         }
                     >
-                        <Route path="top-tracks" element={<TopSongs changeSong={handleSongChange} />} />
-                        <Route path="recent-songs" element={<LatestSongs changeSong={handleSongChange} />} />
-                        <Route path="top-artists" element={<TopArtists />} />
-                        <Route path="recommendations" element={<Recommendations userId={userId} changeSong={handleSongChange} />} />
-                        <Route path="custom-recommendations" element={<CustomRecommendation userId={userId} changeSong={handleSongChange} />} />
+
+                            <Route path="top-tracks" element={<TopSongs changeSong={handleSongChange} />} />
+                            <Route path="recent-songs" element={<LatestSongs changeSong={handleSongChange} />} />
+                            <Route path="top-artists" element={<TopArtists />} />
+                            <Route path="recommendations" element={<Recommendations userId={userId} changeSong={handleSongChange} />} />
+                            <Route path="custom-recommendations" element={<CustomRecommendation userId={userId} changeSong={handleSongChange} />} />
+
                     </Route>
                 </Routes>
             </Router>
+        </currentSongContext.Provider>
             {playerDisplaying ? (
                 <div className="player">
                     <SpotifyPlayer

@@ -3,7 +3,7 @@ import axios from "axios";
 import DownloadList from "./DownloadList";
 import ExportPlaylist from "./ExportPlaylist";
 import PropTypes from "prop-types";
-import ListImage from "./ListImage";
+import ListImage from "./SongCover/SongCover";
 import { TokenContext } from "../Login";
 
 const CustomRecommendation = ({ userId, changeSong }) => {

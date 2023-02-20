@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import ListImage from "../../ListImage";
+import SongCover from "../../SongCover/SongCover";
 import useApi from "../../../hooks/useApi";
 import listsApi from "../../../services/api/listsApi";
 import { TokenContext } from "../../../Login";
@@ -30,7 +30,7 @@ export default ({ changeSong }) => {
                             <p>{formatDate(item.played_at)}</p>
                         </Grid>
                         <Grid xs={1}>
-                            <ListImage image={item.track.album.images[2].url} uri={item.track.uri} changeSong={changeSong} />
+                            <SongCover image={item.track.album.images[2].url} uri={item.track.uri} changeSong={changeSong} />
                         </Grid>
                         <Grid xs={4}>
                             <p>{item.track.name}</p>

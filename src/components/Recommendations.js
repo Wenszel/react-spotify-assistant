@@ -3,7 +3,7 @@ import axios from "axios";
 import DownloadList from "./DownloadList";
 import ExportPlaylist from "./ExportPlaylist";
 import PropTypes from "prop-types";
-import ListImage from "./ListImage";
+import ListImage from "./SongCover/SongCover";
 import { TokenContext } from "../Login";
 import {CircularProgress, Grid} from "@mui/material";
 
@@ -48,10 +48,10 @@ const Recommendations = ({ userId, changeSong }) => {
                         <Grid item xs={1}>
                             <ListImage image={item.album.images[2].url} uri={item.uri} changeSong={changeSong} />
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={6}>
                             <p>{item.name}</p>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={5}>
                             <p>{item.artists.map(artist => artist.name).join(", ")}</p>
                         </Grid>
                     </Grid>

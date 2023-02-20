@@ -1,0 +1,51 @@
+.overlay {
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+}
+.overlay > span {
+    padding: 1px;
+    margin: 1px;
+    width: 1px;
+    height: 50%;
+    background-color: green;
+    border-radius: 3px;
+    transform-origin: bottom;
+    animation: bounce 2.2s ease infinite alternate;
+    content: '';
+}
+.overlay > span:nth-of-type(2) {
+    animation-delay: -2.2s;
+}
+.overlay > span:nth-of-type(3) {
+    animation-delay: -3s;
+}
+.overlay > span:nth-of-type(4) {
+    animation-delay: -4.5s;
+}
+.overlay:hover {
+    opacity: 0;
+}
+@keyframes bounce {
+    10% {
+        transform: scaleY(0.3);
+    }
+    30% {
+        transform: scaleY(1);
+    }
+    60% {
+        transform: scaleY(0.5);
+    }
+    80% {
+        transform: scaleY(0.75);
+    }
+    100% {
+        transform: scaleY(0.6);
+    }
+}

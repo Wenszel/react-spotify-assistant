@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import ListImage from "../../ListImage";
+import SongCover from "../../SongCover/SongCover";
 import { TokenContext } from "../../../Login";
 import useApi from "../../../hooks/useApi";
 import listsApi from "../../../services/api/listsApi";
@@ -7,7 +7,7 @@ import { Grid, CircularProgress } from "@mui/material";
 import artist from "../interfaces/artists";
 import song from "../interfaces/song";
 
-const TopSongs = ({ changeSong }) => {
+const TopTracks = ({ changeSong }) => {
     const token = useContext(TokenContext);
     const getTopSongsApi = useApi(listsApi.getTopSongs, token);
     useEffect(() => {
@@ -30,7 +30,7 @@ const TopSongs = ({ changeSong }) => {
                                     <p>{index + 1}</p>
                                 </Grid>
                                 <Grid xs={1} item={true}>
-                                    <ListImage image={song.album.images[2].url} uri={song.uri} changeSong={changeSong} />
+                                    <SongCover image={song.album.images[2].url} uri={song.uri} changeSong={changeSong} />
                                 </Grid>
                                 <Grid xs={5} item={true}>
                                     <p style={{ fontWeight: "bold" }}>{song.name}</p>
@@ -48,4 +48,4 @@ const TopSongs = ({ changeSong }) => {
         </>
     );
 };
-export default TopSongs;
+export default TopTracks;
